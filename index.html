@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>for my wifey</title>
+    <title>be my valentine please!</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         body { 
@@ -24,15 +24,13 @@
         #noBtn { background-color: #adb5bd; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 50px; cursor: pointer; }
     </style>
 </head>
-<body>
+<body onclick="playMusic()">
 
-    <iframe width="0" height="0" src="https://www.youtube.com/embed/Q49pnA4jsp8?autoplay=1" frameborder="0" allow="autoplay"></iframe>
+    <div id="player"></div>
 
     <div class="container" id="mainContainer">
-        <img id="imageDisplay" src="https://i.ibb.co/S4w35kmf/Whats-App-Image-2026-02-02-at-5-44-49-PM.jpg" alt="Us">
-        
-        <h1 id="question">will you be my valentine!</h1>
-
+        <img id="imageDisplay" src="https://i.ibb.co/S7xJs1zg/Whats-App-Image-2026-02-02-at-5-44-49-PM.jpg" alt="Us">
+        <h1 id="question">will you be my valentine please</h1>
         <div class="buttons">
             <button id="yesBtn" onclick="celebrate()">Yes</button>
             <button id="noBtn" onclick="handleNoClick()">No</button>
@@ -40,20 +38,42 @@
     </div>
 
     <script>
+        // YouTube API Load
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0',
+                width: '0',
+                videoId: 'Q49pnA4jsp8',
+                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'Q49pnA4jsp8' },
+                events: { 'onReady': onPlayerReady }
+            });
+        }
+
+        function onPlayerReady(event) {
+            event.target.mute(); // Mute initially to allow autoplay
+            event.target.playVideo();
+        }
+
+        function playMusic() {
+            if (player) {
+                player.unMute();
+                player.setVolume(100);
+                player.playVideo();
+            }
+        }
+
         let yesSize = 18;
         let noClickCount = 0;
-
-        // EDIT YOUR TEXTS HERE
-        const noTexts = [
-            "NOOOO COME ONN", 
-            "darling please?", 
-            "are you shore", 
-            "Pleeaseeee", 
-            "please perchance?", 
-            "PRETTY PLEASE"
-        ];
+        const noTexts = ["pretty please?", "are you shore","completely sure?", "pleeaseeee", "dania pleaseeee", "CMON PLEASEE"];
 
         function handleNoClick() {
+            playMusic(); // Trigger music on click
             yesSize += 40;
             const yesBtn = document.getElementById('yesBtn');
             yesBtn.style.fontSize = yesSize + "px";
@@ -63,22 +83,19 @@
             if(noClickCount < noTexts.length) {
                 noBtn.innerText = noTexts[noClickCount];
                 noClickCount++;
-            } else {
-                noBtn.innerText = "CMONNN PLEASEEE";
             }
         }
 
         function celebrate() {
-            // Confetti effect
+            playMusic(); // Trigger music on click
             confetti({
                 particleCount: 150, spread: 70, origin: { y: 0.6 },
                 colors: ['#0077cc', '#74c0fc', '#ffffff']
             });
 
-            // Switch to PICTURE 2 and final message
             document.getElementById('mainContainer').innerHTML = `
-                <img src="https://i.ibb.co/XZcJRzJg/Whats-App-Image-2025-10-11-at-12-08-31-AM.jpg">
-                <h1 style="color: #0077cc;">AYAYYAYAAYAY I LOVE YOUU</h1>
+                <img src="https://i.ibb.co/1Ybrc8xN/Whats-App-Image-2025-10-11-at-12-08-31-AM.jpg">
+                <h1 style="color: #0077cc;">YAYAAYAYAYAY MWAH MWAH MWAH </h1>
             `;
         }
     </script>
