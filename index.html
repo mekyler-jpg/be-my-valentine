@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Girl</title>
+    <style>
+        body { text-align: center; font-family: 'Arial', sans-serif; background-color: #ffe6e6; display: flex; flex-direction: column; justify-content: center; height: 100vh; margin: 0; }
+        img { width: 200px; border-radius: 10px; margin-bottom: 20px; }
+        .buttons { display: flex; justify-content: center; align-items: center; gap: 20px; }
+        #yesBtn { background-color: #4CAF50; color: white; border: none; padding: 15px 32px; font-size: 16px; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+        #noBtn { background-color: #f44336; color: white; border: none; padding: 15px 32px; font-size: 16px; border-radius: 5px; cursor: pointer; }
+        h1 { color: #d32f2f; }
+    </style>
+</head>
+<body>
+
+    <img id="imageDisplay" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2I1OHR6cXJ6amZ4NmZ6ZzJ6ZzZ6ZzZ6ZzZ6ZzZ6ZzZ6ZzZ6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c76IJLufpNUMo/giphy.gif" alt="Minion">
+    <h1 id="question">Will you be my Valentine?</h1>
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="celebrate()">Yes</button>
+        <button id="noBtn" onclick="makeYesBigger()">No</button>
+    </div>
+
+    <script>
+        let yesSize = 16;
+        const messages = ["Are you sure?", "Think again!", "Pleeasee?", "Don't do this to me", "I'm gonna cry..."];
+        let msgIndex = 0;
+
+        function makeYesBigger() {
+            yesSize += 40; // Makes Yes button grow
+            document.getElementById('yesBtn').style.fontSize = yesSize + "px";
+            
+            // Change the text of the No button to be funny
+            if (msgIndex < messages.length) {
+                document.getElementById('noBtn').innerText = messages[msgIndex];
+                msgIndex++;
+            }
+        }
+
+        function celebrate() {
+            document.body.innerHTML = `
+                <h1>YAYYYY! ❤️</h1>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXp6amZ4NmZ6ZzJ6ZzZ6ZzZ6ZzZ6ZzZ6ZzZ6ZzZ6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l41lTfuxV5NfLlw6A/giphy.gif">
+                <p>See you on the 14th!</p>
+            `;
+        }
+    </script>
+</body>
+</html>
